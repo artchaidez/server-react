@@ -11,6 +11,8 @@ router.get('/', async function(req, res, next) {
 
 router.get('/:userId', async function(req, res, next) {
     const todos = await Todo.find().where('author').equals(req.params.userId).exec()
+    //const todos = await Todo.findById(req.params.userId).exec()
+
     return res.status(200).json({"todos": todos})
 });
 

@@ -31,21 +31,21 @@ router.get('/:todoId', async function(req, res, next) {
     return res.status(200).json(todo)
 }); 
 
-router.delete('/:todoId',  (req,res) => {
+router.delete('/:todoId', async (req,res) => {
     const { todoId } = req.params;
 
-    Todo.findOneAndDelete( {_id: todoId} ).exec((error, todo) => {
+    await Todo.findOneAndDelete( {_id: todoId} ).exec((error, todo) => {
         if(error)
           return res.status(500).json({code: 500, message: 'Error occured when deleting todo', error: error})
         res.status(200).json(todo)
       });
 })
 
-router.put('/:todoId',  (req,res) => {
+router.put('/:todoId', async (req,res) => {
     const { todoId } = req.params;
     const { complete, completedOn } = req.body;
 
-    Todo.findOneAndUpdate( {_id: todoId}, {complete: complete, completedOn: completedOn} ).exec((error, todo) => {
+    await Todo.findOneAndUpdate( {_id: todoId}, {complete: complete, completedOn: completedOn} ).exec((error, todo) => {
         if(error)
           return res.status(500).json({code: 500, message: 'Error occured updating todo', error: error})
         res.status(200).json(todo)
