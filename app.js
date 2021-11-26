@@ -6,7 +6,6 @@ require('dotenv').config()
 require('./models/setupMongo')();
 
 var authRouter = require('./routes/auth');
-var postRouter = require('./routes/post');
 var todoRouter = require('./routes/todo');
 var userRouter = require('./routes/users');
 
@@ -17,7 +16,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/auth', authRouter);
-app.use('/post', postRouter);
 app.use('/todo', todoRouter);
 app.use('/users', userRouter);
 
